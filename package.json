@@ -1,0 +1,45 @@
+{
+  "name": "re-template-tag",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "babel esm --out-dir cjs",
+    "prepublishOnly": "npm run build",
+    "test": "ava"
+  },
+  "author": "Axel Rauschmayer",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rauschma/re-template-tag.git"
+  },
+  "//": [
+    "babel-cli: needed for building",
+    "babel-register: needed for testing via AVA"
+  ],
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "ava": "^0.21.0",
+    "babel-preset-env": "^1.5.1",
+    "babel-register": "^6.24.1"
+  },
+  "module": "./esm/index.js",
+  "main": "./cjs/index.js",
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
+  },
+  "ava": {
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
+  }
+}
