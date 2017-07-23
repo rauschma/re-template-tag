@@ -10,19 +10,16 @@ export function re(strs, ...substs) {
         }
         reStr += transformRaw(strs.raw[i+1]);
     }
-    return (arg) => {
-        let flags;
-        if (Array.isArray(arg)) {
-            // Called as a template tag function
-            flags = arg[0];
-        } else if (typeof arg === 'string') {
-            // Called as a function with a string parameter
-            flags = arg;
-        } else {
-            throw new Error('Illegal argument: '+arg);
+    let flags = '';
+    if (reStr.startsWith('/')) {
+        const lastSlashIndex = reStr.lastIndexOf('/');
+        if (lastSlashIndex === 0) {
+            throw new Error('If the `re` string starts with a slash, it must end with a second slash and zero or more flags: '+reStr);
         }
-        return new RegExp(reStr, flags);
+        flags = reStr.slice(lastSlashIndex+1);
+        reStr = reStr.slice(1, lastSlashIndex);
     }
+    return new RegExp(reStr, flags);
 }
 
 function transformRaw(str) {
