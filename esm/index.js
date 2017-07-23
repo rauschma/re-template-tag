@@ -1,5 +1,5 @@
 export function re(strs, ...substs) {
-    let reStr = strs.raw[0];
+    let reStr = transformRaw(strs.raw[0]);
     for (const [i, subst] of substs.entries()) {
         if (subst instanceof RegExp) {
             reStr += subst.source;
@@ -8,7 +8,7 @@ export function re(strs, ...substs) {
         } else {
             throw new Error('Illegal substitution: '+subst);
         }
-        reStr += strs.raw[i+1];
+        reStr += transformRaw(strs.raw[i+1]);
     }
     return (arg) => {
         let flags;
@@ -23,6 +23,10 @@ export function re(strs, ...substs) {
         }
         return new RegExp(reStr, flags);
     }
+}
+
+function transformRaw(str) {
+    return str.replace(/\\`/g, '`');
 }
 
 /**

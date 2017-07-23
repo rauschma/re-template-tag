@@ -2,10 +2,13 @@ import test from 'ava';
 import {re} from '../esm/index.js';
 
 test('Composing regular expressions', t => {
-    const RE_YEAR = /[0-9]{4}/;
-    const RE_MONTH = /[0-9]{2}/;
-    const RE_DAY = /[0-9]{2}/;
-	t.is(re`^(${RE_YEAR})-(${RE_MONTH})-(${RE_DAY})$``u`.source, '^([0-9]{4})-([0-9]{2})-([0-9]{2})$');
+	const RE_YEAR = /([0-9]{4})/;
+	const RE_MONTH = /([0-9]{2})/;
+	const RE_DAY = /([0-9]{2})/;
+	t.is(
+		re`^${RE_YEAR}-${RE_MONTH}-${RE_DAY}$``u`.source,
+		'^([0-9]{4})-([0-9]{2})-([0-9]{2})$'
+	);
 });
 test('Setting flags', t => {
     const regexp1 = re`abc``gu`;
@@ -32,4 +35,14 @@ test('Use “raw” backslashes like in regular expressions', t => {
 });
 test('Slashes don’t need to be escaped', t => {
 	t.true(re`^/$``u`.test('/'));
+});
+test('Escaping backticks', t => {
+	// Must escape in static text:
+	const RE_BACKTICK = re`^\`$``u`;
+	t.is(RE_BACKTICK.source, '^`$');
+	t.true(RE_BACKTICK.test('`'));
+	// No escaping of backticks in dynamic text:
+	const str = '`\\`';
+	t.is(re`${str}```.source, '`\\\\`');
+		// Single backslash in `str` is escaped inside regular expression
 });

@@ -16,10 +16,10 @@ re`abc``gu`
 ```js
 import {re} from 're-template-tag';
 
-const RE_YEAR = /[0-9]{4}/;
-const RE_MONTH = /[0-9]{2}/;
-const RE_DAY = /[0-9]{2}/;
-const RE_DATE = re`^(${RE_YEAR})-(${RE_MONTH})-(${RE_DAY})$``u`;
+const RE_YEAR = /([0-9]{4})/;
+const RE_MONTH = /([0-9]{2})/;
+const RE_DAY = /([0-9]{2})/;
+const RE_DATE = re`^${RE_YEAR}-${RE_MONTH}-${RE_DAY}$``u`;
 
 RE_DATE.test('2017-01-23'); // true
 ```
