@@ -1,6 +1,6 @@
 {
   "name": "re-template-tag",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "scripts": {
     "build": "babel esm --out-dir cjs",
     "prepublishOnly": "npm run build",
