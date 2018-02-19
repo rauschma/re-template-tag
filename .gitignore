@@ -1,3 +1,5 @@
-# Built via npm run build
-cjs
+.DS_Store
 node_modules
+
+# Created via npm run build:
+cjs

@@ -29,6 +29,12 @@ RE_DATE.test('2017-01-23'); // true
 * Take a look at [the unit tests](https://github.com/rauschma/re-template-tag/blob/master/test/index_test.js).
 * Check out [the blog post on re-template-tag](http://2ality.com/2017/07/re-template-tag.html).
 
+## Related work
+
+* http://xregexp.com
+* https://github.com/DmitrySoshnikov/regexp-tree
+* https://github.com/shannonmoeller/regx
+
 ## Acknowledgement
 
 The syntax for separating flags from the actual regular expression is based on an idea by [Mathias Bynens](https://twitter.com/mathias/).
